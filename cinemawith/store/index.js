@@ -3,6 +3,7 @@ export const strict = false;
 import Vue from "Vue";
 import Vuex from "Vuex";
 import uuidv4 from "uuid";
+import randomInt from "random-int";
 import firebase from "../plugins/firebase";
 import {
   firebaseMutations,
@@ -127,18 +128,24 @@ export const actions = {
 
   //------------------movies
   //search movies
-  searchFriends: function (context, {
-    userMovieRef
-  }) {
-    userMovieRef.orderByChild("uid").once("value", function (snapshot) {
-      context.commit("setUsers", snapshot.val());
-    });
+  setSelf: function (context) {
     const user = firebase.auth().currentUser;
     const selfRef = db.ref("/users/" + user.uid);
     selfRef.once("value", function (snapshot) {
       context.commit("setSelf", snapshot.val());
     })
   },
+
+  searchFriends: (context, key) => {
+    const userMovieRef = db
+      .ref("/movies")
+      .child(key)
+      .child("users");
+    userMovieRef.once("value", function (snapshot) {
+      context.commit("setUsers", snapshot.val());
+    })
+  },
+
   initFavoriteMovie: function (context) {
     const favoriteMovieRef = db.ref("/favoriteMovie");
     favoriteMovieRef.once("value", function (snapshot) {
@@ -157,6 +164,7 @@ export const actions = {
   //register
   addUserToMovie: firebaseAction((context, key) => {
     const user = context.state.loginUser;
+    const randomKey = randomInt(1000000000000)
     const userMovieSelect = db.ref("/movies/" + key + "/users/" + user.uid);
     userMovieSelect
       .orderByChild("uid")

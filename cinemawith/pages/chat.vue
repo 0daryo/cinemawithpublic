@@ -18,7 +18,7 @@
           <br>
           <div v-for="message in messages" :key="message.id">
             <div v-if="message.text">
-              <div :class="[message.sender==user.uid ? 'notSelf': 'self']">
+              <div :class="[message.sender!=user.uid ? 'notSelf': 'self']">
               <p>
                 {{message.text}}
               </p>
@@ -43,7 +43,6 @@ export default {
     };
   },
   created: function() {
-    this.$store.dispatch("setMovie");
     this.$store.dispatch("setRead");
     this.movie = this.$store.state.movie;
     this.user = this.$store.state.friend;

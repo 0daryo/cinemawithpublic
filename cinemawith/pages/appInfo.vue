@@ -5,11 +5,13 @@
   <div>
     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-  <el-button type="primary" icon="el-icon-message"><a href="mailto:cinamewith123@gmail.com">mail</a></el-button>
 </div>
+<span>
+<el-button size="mini" type="primary" icon="el-icon-message"><a href="mailto:cinamewith123@gmail.com">mail</a></el-button>
 <el-button type="primary" plain v-on:click="showModal=true">
     利用規約
 </el-button>
+</span>
 <ServiceContract v-if="showModal" @close="showModal = false"/>
 <HowToUse/>
 </div>

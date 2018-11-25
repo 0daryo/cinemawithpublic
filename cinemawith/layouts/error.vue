@@ -3,7 +3,7 @@
     <h1 v-if="error.statusCode === 404">ページが見つかりません</h1>
     <h1 v-else>エラーが発生しました</h1>
     <h2>お問い合わせ<el-button type="primary" icon="el-icon-message"><a href="mailto:cinamewith123@gmail.com">mail</a></el-button></h2>
-    <nuxt-link to="/">ホーム</nuxt-link>
+    <nuxt-link to="/login">ホーム</nuxt-link>
   </div>
 </template>
 <script>

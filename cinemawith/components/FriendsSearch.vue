@@ -52,15 +52,22 @@ export default {
   components: {
     Message
   },
+
+  async fetch({ store, redirect }) {
+    const key = this.$store.state.movieKey;
+    store.dispatch("searchFriends", key);
+  },
+
   created: function() {
     const key = this.$store.state.movieKey;
-    const userMovieRef = db
-      .ref("/movies")
-      .child(key)
-      .child("users");
-    this.$store.dispatch("searchFriends", { userMovieRef });
-    this.users = this.$store.state.users;
-    console.log(this.users);
+    this.$store.dispatch("searchFriends", key);
+    this.$store.dispatch("setSelf");
+    const friends = this.$store.state.users;
+    const userArray = [];
+    Object.keys(friends).forEach(function(value) {
+      userArray.push(friends[value]);
+    });
+    this.users = shuffle(userArray);
   },
   methods: {
     follow: function(user) {
@@ -68,6 +75,21 @@ export default {
     }
   }
 };
+
+function shuffle(array) {
+  var n = array.length,
+    t,
+    i;
+
+  while (n) {
+    i = Math.floor(Math.random() * n--);
+    t = array[n];
+    array[n] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
 </script>
 
 <style scoped>

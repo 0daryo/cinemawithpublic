@@ -61,7 +61,7 @@ module.exports = {
 
   manifest: {
     name: 'CinemaWith',
-    short_name: 'CW',
+    short_name: 'CinemaWith',
     title: 'CinemaWith',
     'og:title': 'CinemaWith',
     description: 'CinemaWith',
