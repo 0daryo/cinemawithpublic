@@ -1,6 +1,6 @@
 # cinemawith
 
-> Nuxt.js project
+> An app which helps you make friends thorough movies
 
 ## Build Setup
 
